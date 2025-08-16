@@ -1,0 +1,1558 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surekha Mind Heal - Cinematic Healing Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/28fcbac9-b676-4ed7-be8d-d5f32d00e26e.png') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-active {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            padding: 10px 0 !important;
+            transition: all 0.3s ease;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .booking-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .booking-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .admin-panel {
+            border-left: 3px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .review-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .star-rating {
+            color: #FFD700;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 1200px;
+            animation: zoomIn 0.3s;
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.5); }
+            to { transform: scale(1); }
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--secondary);
+            animation: spin 1s ease-in-out infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Mobile-first responsive fixes */
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 100vh;
+                background-attachment: scroll;
+            }
+            
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .text-5xl {
+                font-size: 2.5rem;
+            }
+            
+            .text-7xl {
+                font-size: 3rem;
+            }
+            
+            .booking-card:hover {
+                transform: none;
+            }
+            
+            .gallery-item:hover img {
+                transform: none;
+            }
+            
+            .review-card:hover {
+                transform: none;
+            }
+        }
+        
+        /* Touch-friendly interactions */
+        @media (pointer: coarse) {
+            .hover\:scale-105:hover {
+                transform: none;
+            }
+            
+            .hover\:shadow-xl:hover {
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        }
+        
+        /* Custom scrollbar - hide on mobile */
+        @media (min-width: 769px) {
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+            
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+            
+            ::-webkit-scrollbar-thumb {
+                background: var(--secondary);
+                border-radius: 10px;
+            }
+            
+            ::-webkit-scrollbar-thumb:hover {
+                background: #2980b9;
+            }
+        }
+        
+        /* iOS Safari fixes */
+        .hero-section {
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Ensure text is readable on all devices */
+        body {
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Active nav link styling */
+        .nav-link.active {
+            color: #3498db !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-transparent transition-all duration-300" id="mainNav">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-white">
+                    <span class="text-blue-400">Surekha</span> Mind Healing
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-white hover:text-blue-400 transition nav-link">Home</a>
+                    <a href="#services" class="text-white hover:text-blue-400 transition nav-link">Services</a>
+                    <a href="#book" class="text-white hover:text-blue-400 transition nav-link">Book Session</a>
+                    <a href="#gallery" class="text-white hover:text-blue-400 transition nav-link">Gallery</a>
+                    <a href="#reviews" class="text-white hover:text-blue-400 transition nav-link">Reviews</a>
+                    <a href="#admin" class="text-white hover:text-blue-400 transition nav-link">Admin</a>
+                </div>
+                <button class="md:hidden text-white focus:outline-none" id="menuBtn">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden" id="mobileMenu">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <button class="absolute top-4 right-4 text-white text-3xl" id="closeMenuBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="#home" class="text-white text-2xl hover:text-blue-400 transition mobile-nav-link">Home</a>
+            <a href="#services" class="text-white text-2xl hover:text-blue-400 transition mobile-nav-link">Services</a>
+            <a href="#book" class="text-white text-2xl hover:text-blue-400 transition mobile-nav-link">Book Session</a>
+            <a href="#gallery" class="text-white text-2xl hover:text-blue-400 transition mobile-nav-link">Gallery</a>
+            <a href="#reviews" class="text-white text-2xl hover:text-blue-400 transition mobile-nav-link">Reviews</a>
+            <a href="#admin" class="text-white text-2xl hover:text-blue-400 transition mobile-nav-link">Admin</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section relative" id="home">
+        <button class="hidden admin-edit-btn absolute top-2 right-2 bg-blue-500 text-white p-2 rounded" onclick="editHeroContent()">
+            <i class="fas fa-edit mr-1"></i> Edit Hero
+        </button>
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-down">
+                <span class="text-blue-400">Surekha</span> Mind Healing Experience
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in-up">
+                Transform your mental well-being with our unique cinematic therapy approach. 
+                Experience deep relaxation and healing through guided visualization techniques.
+            </p>
+            <a href="#book" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold px-8 py-3 rounded-full transition duration-300 transform hover:scale-105 animate-fade-in-up">
+                Book Your Session
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+            <a href="#services" class="text-white animate-bounce">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-20 bg-white" id="services">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Our Healing Services</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition relative">
+                        <button class="hidden admin-edit-btn absolute top-2 right-2 bg-blue-500 text-white p-1 rounded" onclick="editService(1)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    <div class="text-blue-500 text-5xl mb-4">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Cinematic Meditation</h3>
+                    <p class="text-gray-600">
+                        Immersive guided visualization sessions using cinematic techniques to transport you to peaceful environments.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition relative">
+                    <button class="hidden admin-edit-btn absolute top-2 right-2 bg-blue-500 text-white p-1 rounded" onclick="editService(2)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <div class="text-blue-500 text-5xl mb-4">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Mindfulness Therapy</h3>
+                    <p class="text-gray-600">
+                        Structured mindfulness sessions combining traditional techniques with multimedia elements for enhanced focus.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition relative">
+                    <button class="hidden admin-edit-btn absolute top-2 right-2 bg-blue-500 text-white p-1 rounded" onclick="editService(3)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <div class="text-blue-500 text-5xl mb-4">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Sound Healing</h3>
+                    <p class="text-gray-600">
+                        Therapeutic soundscapes designed by audiologists to promote deep relaxation and stress reduction.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="py-20 bg-gray-100" id="book">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Book Your Session</h2>
+            
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden booking-card relative">
+                <button class="hidden admin-edit-btn absolute top-2 right-2 bg-blue-500 text-white p-2 rounded" onclick="editBookingForm()">
+                    <i class="fas fa-edit mr-1"></i> Edit Form Fields
+                </button>
+                <div class="md:flex">
+                    <div class="md:w-1/2 bg-blue-500 p-10 text-white flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold mb-4">Begin Your Healing Journey</h3>
+                        <p class="mb-6">
+                            Select your preferred date and time for a personalized cinematic healing session with our expert therapist.
+                        </p>
+                        <div class="flex items-center">
+                            <div class="mr-4 text-blue-200">
+                                <i class="fas fa-clock text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Session Duration</h4>
+                                <p>60-90 minutes</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 p-10">
+                        <form id="bookingForm">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="date" class="block text-gray-700 font-medium mb-2">Date</label>
+                                <input type="date" id="date" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="time" class="block text-gray-700 font-medium mb-2">Preferred Time</label>
+                                <select id="time" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                    <option value="">Select a time</option>
+                                    <option value="09:00">09:00 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="14:00">02:00 PM</option>
+                                    <option value="16:00">04:00 PM</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Special Requests</label>
+                                <textarea id="message" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300" id="submitBooking">
+                                Book Appointment
+                            </button>
+                        </form>
+                        <div id="bookingSuccess" class="hidden mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                            Your appointment has been submitted successfully! We'll contact you shortly to confirm.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20" id="gallery">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Healing Space Gallery</h2>
+            
+            <!-- Gallery Navigation -->
+            <div class="flex justify-center mb-10">
+                <button class="px-4 py-2 bg-blue-500 text-white rounded-l-lg font-medium gallery-tab active" data-tab="photos">Photos</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 font-medium gallery-tab" data-tab="videos">Videos</button>
+            </div>
+            
+            <!-- Photos Tab Content -->
+            <div class="tab-content active" id="photos-tab">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Sample gallery items - these would be fetched from a database in a real app -->
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/17b3e208-46e8-4895-8b4d-5e43e319710f.png')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8b95f1ce-dda1-4311-97d0-0ef28c793509.png" class="w-full h-64 object-cover" alt="Peaceful meditation room with soft lighting and Japanese-style decor">
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Meditation Room</h3>
+                            <p class="text-gray-600 text-sm">Updated: 2023-10-15</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f3625451-20bf-47c6-b8c4-92939990c982.png')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d1dbfa55-d23a-4022-9778-0c999759533b.png" class="w-full h-64 object-cover" alt="Therapy session in progress with therapist guiding client through visualization exercises">
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Session in Progress</h3>
+                            <p class="text-gray-600 text-sm">Updated: 2023-10-10</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/417706ef-c855-4188-b164-4e4e2968c79d.png')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/42277064-451d-4cd2-82b3-1a9bcea4bc0e.png" class="w-full h-64 object-cover" alt="Group therapy session in circular formation with warm ambient lighting">
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Group Session</h3>
+                            <p class="text-gray-600 text-sm">Updated: 2023-09-28</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b3bb3f9c-343a-4165-b9ba-877f44ab600c.png')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5db35232-95db-424c-abdf-42b93859a3b2.png" class="w-full h-64 object-cover" alt="Outdoor therapy space with comfortable seating surrounded by lush greenery">
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Outdoor Space</h3>
+                            <p class="text-gray-600 text-sm">Updated: 2023-09-15</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bc2e313a-4657-4132-92e2-7411e1f1a490.png')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d681382a-4f06-45d5-900d-6693d1f62a0a.png" class="w-full h-64 object-cover" alt="Sound therapy room with Himalayan singing bowls and quality headphones">
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Sound Therapy Room</h3>
+                            <p class="text-gray-600 text-sm">Updated: 2023-09-10</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg relative" onclick="openModal('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/96d89be6-d5a3-4a54-8913-56c55f4f74fd.png')">
+                        <button class="hidden admin-edit-btn absolute top-2 right-2 bg-blue-500 text-white p-1 rounded" onclick="editGalleryItem(1)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/820aa9c8-6a6f-4351-a1c6-83f5fd053d23.png" class="w-full h-64 object-cover" alt="Waiting area with comfortable seating, water feature, and natural wood elements">
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Waiting Area</h3>
+                            <p class="text-gray-600 text-sm">Updated: 2023-08-28</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a38dde1e-c3a3-4d5f-a585-f867c910865e.png')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/963973b9-9f79-46d7-842d-d5bd0345ee57.png" class="w-full h-64 object-cover" alt="Therapist's workstation with dual monitors showing brainwave visualization">
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Therapist Station</h3>
+                            <p class="text-gray-600 text-sm">Updated: 2023-08-15</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6c41f7db-385c-49de-9c6a-f727b7e952df.png')">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c636fa0c-4094-428b-9409-cf47e0039541.png" class="w-full h-64 object-cover" alt="Client testimonial wall with framed quotes and success stories">
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Testimonial Wall</h3>
+                            <p class="text-gray-600 text-sm">Updated: 2023-08-05</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Upload New Photo Button (admin only - hidden by default) -->
+                <div class="mt-10 text-center hidden" id="photoUploadSection">
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="showUploadForm('photo')">
+                        <i class="fas fa-plus mr-2"></i> Upload New Photo
+                    </button>
+                    <div class="mt-4 hidden" id="photoUploadForm">
+                        <input type="file" id="photoUpload" class="hidden" accept="image/*">
+                        <label for="photoUpload" class="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-300 mr-2">
+                            Select Photo
+                        </label>
+                        <input type="text" id="photoTitle" placeholder="Photo Title" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2">
+                        <input type="text" id="photoDescription" placeholder="Description" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2">
+                        <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300" onclick="uploadPhoto()">
+                            <i class="fas fa-check mr-2"></i> Confirm Upload
+                        </button>
+                        <button class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300 ml-2" onclick="hideUploadForm('photo')">
+                            Cancel
+                        </button>
+                    </div>
+                    <div class="spinner mt-4 hidden" id="photoUploadSpinner"></div>
+                    <div class="mt-2 hidden" id="photoUploadSuccess"></div>
+                </div>
+            </div>
+            
+            <!-- Videos Tab Content -->
+            <div class="tab-content" id="videos-tab">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                        <div class="relative overflow-hidden" style="padding-bottom: 56.25%">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Guided Meditation Demo</h3>
+                            <p class="text-gray-600 text-sm">Duration: 8:32</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                        <div class="relative overflow-hidden" style="padding-bottom: 56.25%">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Client Testimonial</h3>
+                            <p class="text-gray-600 text-sm">Duration: 3:45</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                        <div class="relative overflow-hidden" style="padding-bottom: 56.25%">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Our Facility Tour</h3>
+                            <p class="text-gray-600 text-sm">Duration: 5:18</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                        <div class="relative overflow-hidden" style="padding-bottom: 56.25%">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Breathing Techniques</h3>
+                            <p class="text-gray-600 text-sm">Duration: 6:15</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                        <div class="relative overflow-hidden" style="padding-bottom: 56.25%">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Morning Routine</h3>
+                            <p class="text-gray-600 text-sm">Duration: 10:22</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                        <div class="relative overflow-hidden" style="padding-bottom: 56.25%">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-4 bg-white">
+                            <h3 class="font-bold text-lg">Stress Relief Tips</h3>
+                            <p class="text-gray-600 text-sm">Duration: 7:30</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Upload New Video Button (admin only - hidden by default) -->
+                <div class="mt-10 text-center hidden" id="videoUploadSection">
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="showUploadForm('video')">
+                        <i class="fas fa-plus mr-2"></i> Upload New Video
+                    </button>
+                    <div class="mt-4 hidden" id="videoUploadForm">
+                        <input type="file" id="videoUpload" class="hidden" accept="video/*">
+                        <label for="videoUpload" class="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg border border-gray-300 transition duration-300 mr-2">
+                            Select Video
+                        </label>
+                        <input type="text" id="videoTitle" placeholder="Video Title" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2">
+                        <input type="text" id="videoDescription" placeholder="Description" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2">
+                        <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300" onclick="uploadVideo()">
+                            <i class="fas fa-check mr-2"></i> Confirm Upload
+                        </button>
+                        <button class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300 ml-2" onclick="hideUploadForm('video')">
+                            Cancel
+                        </button>
+                    </div>
+                    <div class="spinner mt-4 hidden" id="videoUploadSpinner"></div>
+                    <div class="mt-2 hidden" id="videoUploadSuccess"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="py-20 bg-gray-100" id="reviews">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Client Experiences</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+                <div class="review-card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2c9b2d42-8edd-4615-a969-886bbd839489.png" alt="Smiling woman with curly hair in her 40s" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Sarah Johnson</h4>
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">
+                        "The cinematic meditation sessions transported me to places I could never imagine. After just three sessions, my anxiety levels dropped significantly. The environment is so peaceful and the therapist truly listens."
+                    </p>
+                    <p class="text-gray-400 text-sm mt-3">Posted: 2023-10-12</p>
+                </div>
+                
+                <div class="review-card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dba121bb-516d-46ec-8035-50580b40f454.png" alt="Smiling man in his 30s with short trimmed beard" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Michael Chen</h4>
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">
+                        "As someone who struggled with traditional meditation, the visualization techniques used here finally made it click for me. The therapists incorporate your personal happy places into the sessions. Life-changing!"
+                    </p>
+                    <p class="text-gray-400 text-sm mt-3">Posted: 2023-09-28</p>
+                </div>
+                
+                <div class="review-card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/304061d4-d7f9-4701-ad7f-7d2ea5ab23ca.png" alt="Elderly woman with white hair and glasses" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Margaret Williams</h4>
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">
+                        "After my husband passed away, I couldn't find peace anywhere. These sessions helped me visualize him in beautiful settings and process my grief in a way traditional therapy couldn't. The staff are angels."
+                    </p>
+                    <p class="text-gray-400 text-sm mt-3">Posted: 2023-09-15</p>
+                </div>
+            </div>
+            
+            <!-- New Review Form -->
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-6 text-center">Share Your Experience</h3>
+                <form id="reviewForm">
+                    <div class="mb-4">
+                        <label for="reviewName" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                        <input type="text" id="reviewName" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="reviewEmail" class="block text-gray-700 font-medium mb-2">Email (won't be published)</label>
+                        <input type="email" id="reviewEmail" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Rating</label>
+                        <div class="flex space-x-2">
+                            <i class="far fa-star text-2xl cursor-pointer star" data-rating="1"></i>
+                            <i class="far fa-star text-2xl cursor-pointer star" data-rating="2"></i>
+                            <i class="far fa-star text-2xl cursor-pointer star" data-rating="3"></i>
+                            <i class="far fa-star text-2xl cursor-pointer star" data-rating="4"></i>
+                            <i class="far fa-star text-2xl cursor-pointer star" data-rating="5"></i>
+                        </div>
+                        <input type="hidden" id="reviewRating" value="0">
+                    </div>
+                    <div class="mb-4">
+                        <label for="reviewText" class="block text-gray-700 font-medium mb-2">Your Review</label>
+                        <textarea id="reviewText" rows="5" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300" id="submitReview">
+                        Submit Review
+                    </button>
+                </form>
+                <div id="reviewSuccess" class="hidden mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                    Thank you for your review! It has been submitted and will appear after approval.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Section -->
+    <section class="py-20 bg-white" id="admin">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Admin Panel</h2>
+            
+            <div class="max-w-5xl mx-auto">
+                <!-- Admin Login Form (shown by default) -->
+                <div id="adminLoginForm" class="bg-gray-50 p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Admin Login</h3>
+                    <form id="loginForm">
+                        <div class="mb-4">
+                            <label for="adminUsername" class="block text-gray-700 font-medium mb-2">Username</label>
+                            <input type="text" id="adminUsername" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="adminPassword" class="block text-gray-700 font-medium mb-2">Password</label>
+                            <input type="password" id="adminPassword" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300" id="submitLogin">
+                            Login
+                        </button>
+                    </form>
+                    <div id="loginError" class="hidden mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded"></div>
+                </div>
+                
+                <!-- Admin Dashboard (hidden by default) -->
+                <div id="adminDashboard" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold">Admin Dashboard</h3>
+                        <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                            Logout
+                        </button>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg mb-8 admin-panel">
+                        <h4 class="text-xl font-bold mb-4">Booking Management</h4>
+                        
+                        <!-- Booking Status Tabs -->
+                        <div class="flex mb-6">
+                            <button class="px-4 py-2 bg-blue-500 text-white rounded-l-lg font-medium booking-tab active" data-status="pending">Pending</button>
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 font-medium booking-tab" data-status="confirmed">Confirmed</button>
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-r-lg font-medium booking-tab" data-status="rejected">Rejected</button>
+                        </div>
+                        
+                        <!-- Bookings List -->
+                        <div id="bookingsList">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white">
+                                    <thead>
+                                        <tr>
+                                            <th class="py-2 px-4 border-b">Name</th>
+                                            <th class="py-2 px-4 border-b">Date</th>
+                                            <th class="py-2 px-4 border-b">Time</th>
+                                            <th class="py-2 px-4 border-b">Contact</th>
+                                            <th class="py-2 px-4 border-b">Status</th>
+                                            <th class="py-2 px-4 border-b">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="bookingsTableBody">
+                                        <!-- Sample booking row - these would be fetched from a database in a real app -->
+                                        <tr>
+                                            <td class="py-2 px-4 border-b">Emma Thompson</td>
+                                            <td class="py-2 px-4 border-b">2023-11-15</td>
+                                            <td class="py-2 px-4 border-b">14:00</td>
+                                            <td class="py-2 px-4 border-b">emma@example.com<br>555-123-4567</td>
+                                            <td class="py-2 px-4 border-b"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Pending</span></td>
+                                            <td class="py-2 px-4 border-b">
+                                                <button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-2 rounded mr-1 confirm-booking" data-id="1">Confirm</button>
+                                                <button class="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-2 rounded reject-booking" data-id="1">Reject</button>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td class="py-2 px-4 border-b">James Wilson</td>
+                                            <td class="py-2 px-4 border-b">2023-11-16</td>
+                                            <td class="py-2 px-4 border-b">11:00</td>
+                                            <td class="py-2 px-4 border-b">james@example.com<br>555-234-5678</td>
+                                            <td class="py-2 px-4 border-b"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Pending</span></td>
+                                            <td class="py-2 px-4 border-b">
+                                                <button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-2 rounded mr-1 confirm-booking" data-id="2">Confirm</button>
+                                                <button class="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-2 rounded reject-booking" data-id="2">Reject</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg mb-8 admin-panel">
+                        <h4 class="text-xl font-bold mb-4">Gallery Management</h4>
+                        <p class="mb-4 text-gray-600">Manage your photos and videos in the gallery section.</p>
+                        <button id="showGalleryUploadOptions" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                            <i class="fas fa-cog mr-2"></i> Open Gallery Controls
+                        </button>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg mb-8 admin-panel">
+                        <h4 class="text-xl font-bold mb-4">Content Management</h4>
+                        <p class="mb-4 text-gray-600">Edit all website content including hero section, services, and contact information.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <button class="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300" onclick="editHeroSection()">
+                                <i class="fas fa-home mr-2"></i> Edit Hero Section
+                            </button>
+                            <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300" onclick="editAllServices()">
+                                <i class="fas fa-list mr-2"></i> Edit All Services
+                            </button>
+                            <button class="bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300" onclick="editContactDetails()">
+                                <i class="fas fa-address-book mr-2"></i> Edit Contact Info
+                            </button>
+                            <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300" onclick="editWebsiteSettings()">
+                                <i class="fas fa-cogs mr-2"></i> Website Settings
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg admin-panel">
+                        <h4 class="text-xl font-bold mb-4">Reviews Management</h4>
+                        
+                        <!-- Review Status Tabs -->
+                        <div class="flex mb-6">
+                            <button class="px-4 py-2 bg-blue-500 text-white rounded-l-lg font-medium review-tab active" data-status="pending">Pending Approval</button>
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 font-medium review-tab" data-status="published">Published</button>
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-r-lg font-medium review-tab" data-status="rejected">Rejected</button>
+                        </div>
+                        
+                        <!-- Reviews List -->
+                        <div id="reviewsList">
+                            <div class="space-y-4">
+                                <!-- Sample review - these would be fetched from a database in a real app -->
+                                <div class="border-b pb-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div>
+                                            <h5 class="font-bold">Daniel Kim</h5>
+                                            <div class="star-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="text-sm text-gray-500">2023-10-05</div>
+                                    </div>
+                                    <p class="text-gray-600 mb-3">
+                                        "The most relaxing experience I've ever had. The visualization techniques helped me overcome my insomnia after just two sessions."
+                                    </p>
+                                    <div class="flex space-x-2">
+                                        <button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-2 rounded approve-review" data-id="1">Approve</button>
+                                        <button class="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-2 rounded reject-review" data-id="1">Reject</button>
+                                        <button class="bg-gray-500 hover:bg-gray-600 text-white text-sm py-1 px-2 rounded edit-review" data-id="1">Edit</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="border-b pb-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div>
+                                            <h5 class="font-bold">Sophia Martinez</h5>
+                                            <div class="star-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="text-sm text-gray-500">2023-10-01</div>
+                                    </div>
+                                    <p class="text-gray-600 mb-3">
+                                        "Very peaceful environment but I wish the sessions were longer. The therapist was excellent at guiding the visualization process."
+                                    </p>
+                                    <div class="flex space-x-2">
+                                        <button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-2 rounded approve-review" data-id="2">Approve</button>
+                                        <button class="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-2 rounded reject-review" data-id="2">Reject</button>
+                                        <button class="bg-gray-500 hover:bg-gray-600 text-white text-sm py-1 px-2 rounded edit-review" data-id="2">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Surekha Mind Healing</h3>
+                    <p class="text-gray-400">
+                        Transforming mental well-being through cinematic visualization techniques and personalized therapy sessions.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#book" class="text-gray-400 hover:text-white transition">Book Session</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition">Gallery</a></li>
+                        <li><a href="#reviews" class="text-gray-400 hover:text-white transition">Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="relative">
+                    <button class="hidden admin-edit-btn absolute top-1 right-1 bg-blue-500 text-white p-1 rounded text-xs" onclick="editContactInfo()">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <h3 class="text-xl font-bold mb-4" id="contactTitle">Contact Us</h3>
+                    <address class="text-gray-400 not-italic">
+                        <p id="contactAddress"><i class="fas fa-map-marker-alt mr-2"></i> 123 Healing Lane, Serenity City</p>
+                        <p class="my-2" id="contactPhone"><i class="fas fa-phone-alt mr-2"></i> (555) 123-4567</p>
+                        <p id="contactEmail"><i class="fas fa-envelope mr-2"></i> info@surekhamindheal.com</p>
+                    </address>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Surekha Mind Healing. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // Show mobile menu
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.remove('hidden');
+        });
+
+        // Hide mobile menu
+        document.getElementById('closeMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+        });
+
+        // Close mobile menu when clicking on navigation links
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.add('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.getElementById('mainNav').classList.add('nav-active');
+            } else {
+                document.getElementById('mainNav').classList.remove('nav-active');
+            }
+            
+            // Update active navigation link based on scroll position
+            updateActiveNavLink();
+        });
+
+        // Update active navigation link
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Smooth scroll to sections
+        function smoothScrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const headerHeight = document.getElementById('mainNav').offsetHeight;
+                const sectionTop = section.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: sectionTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Add click event listeners to navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                smoothScrollToSection(targetId);
+            });
+        });
+
+        // Gallery tab switching
+        document.querySelectorAll('.gallery-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.gallery-tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.classList.remove('bg-blue-500');
+                    t.classList.remove('text-white');
+                    t.classList.add('bg-gray-200');
+                    t.classList.add('text-gray-700');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                this.classList.remove('bg-gray-200');
+                this.classList.remove('text-gray-700');
+                this.classList.add('bg-blue-500');
+                this.classList.add('text-white');
+                
+                // Hide all tab contents
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show selected tab content
+                const tabId = this.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            document.getElementById('submitBooking').disabled = true;
+            document.getElementById('submitBooking').innerHTML = 'Processing...';
+            
+            // Simulate form submission
+            setTimeout(function() {
+                document.getElementById('bookingSuccess').classList.remove('hidden');
+                document.getElementById('bookingForm').reset();
+                
+                document.getElementById('submitBooking').disabled = false;
+                document.getElementById('submitBooking').innerHTML = 'Book Appointment';
+            }, 1500);
+        });
+
+        // Review form submission
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate rating
+            if (document.getElementById('reviewRating').value === '0') {
+                alert('Please select a rating');
+                return;
+            }
+            
+            // Show loading state
+            document.getElementById('submitReview').disabled = true;
+            document.getElementById('submitReview').innerHTML = 'Submitting...';
+            
+            // Simulate form submission
+            setTimeout(function() {
+                document.getElementById('reviewSuccess').classList.remove('hidden');
+                document.getElementById('reviewForm').reset();
+                
+                // Reset stars
+                document.querySelectorAll('.star').forEach(star => {
+                    star.classList.remove('fas');
+                    star.classList.add('far');
+                });
+                document.getElementById('reviewRating').value = '0';
+                
+                document.getElementById('submitReview').disabled = false;
+                document.getElementById('submitReview').innerHTML = 'Submit Review';
+            }, 1500);
+        });
+
+        // Star rating selection
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                
+                // Update stars visual
+                document.querySelectorAll('.star').forEach((s, index) => {
+                    if (index < rating) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                    } else {
+                        s.classList.remove('fas');
+                        s.classList.add('far');
+                    }
+                });
+                
+                // Update hidden input value
+                document.getElementById('reviewRating').value = rating;
+            });
+        });
+
+        // Admin login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Simple validation - in a real app this would check against a database
+            if (username === 'surekha' && password === 'healing') {
+                document.getElementById('adminLoginForm').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                
+                // Show gallery upload options and edit buttons
+                toggleEditButtons();
+                document.getElementById('photoUploadSection').classList.remove('hidden');
+                document.getElementById('videoUploadSection').classList.remove('hidden');
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+                document.getElementById('loginError').textContent = 'Invalid username or password';
+            }
+        });
+
+        // Admin logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('adminLoginForm').classList.remove('hidden');
+            toggleEditButtons();
+            document.getElementById('loginForm').reset();
+            document.getElementById('loginError').classList.add('hidden');
+            
+            // Hide gallery upload options
+            document.getElementById('photoUploadSection').classList.add('hidden');
+            document.getElementById('videoUploadSection').classList.add('hidden');
+            document.getElementById('photoUploadForm').classList.add('hidden');
+            document.getElementById('videoUploadForm').classList.add('hidden');
+        });
+
+        // Booking management tabs
+        document.querySelectorAll('.booking-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.booking-tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.classList.remove('bg-blue-500');
+                    t.classList.remove('text-white');
+                    t.classList.add('bg-gray-200');
+                    t.classList.add('text-gray-700');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                this.classList.remove('bg-gray-200');
+                this.classList.remove('text-gray-700');
+                this.classList.add('bg-blue-500');
+                this.classList.add('text-white');
+                
+                // In a real app, you would filter bookings based on status
+                console.log('Filter bookings by:', this.getAttribute('data-status'));
+            });
+        });
+
+        // Review management tabs
+        document.querySelectorAll('.review-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.review-tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.classList.remove('bg-blue-500');
+                    t.classList.remove('text-white');
+                    t.classList.add('bg-gray-200');
+                    t.classList.add('text-gray-700');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                this.classList.remove('bg-gray-200');
+                this.classList.remove('text-gray-700');
+                this.classList.add('bg-blue-500');
+                this.classList.add('text-white');
+                
+                // In a real app, you would filter reviews based on status
+                console.log('Filter reviews by:', this.getAttribute('data-status'));
+            });
+        });
+
+        // Confirm booking
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('confirm-booking')) {
+                const bookingId = e.target.getAttribute('data-id');
+                e.target.closest('tr').querySelector('td:nth-child(5)').innerHTML = '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Confirmed</span>';
+                e.target.closest('td').innerHTML = '<button class="bg-gray-500 hover:bg-gray-600 text-white text-sm py-1 px-2 rounded undo-booking" data-id="' + bookingId + '">Undo</button>';
+                alert('Booking confirmed successfully');
+            }
+            
+            if (e.target.classList.contains('reject-booking')) {
+                const bookingId = e.target.getAttribute('data-id');
+                e.target.closest('tr').querySelector('td:nth-child(5)').innerHTML = '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">Rejected</span>';
+                e.target.closest('td').innerHTML = '<button class="bg-gray-500 hover:bg-gray-600 text-white text-sm py-1 px-2 rounded undo-booking" data-id="' + bookingId + '">Undo</button>';
+                alert('Booking rejected successfully');
+            }
+            
+            if (e.target.classList.contains('undo-booking')) {
+                const bookingId = e.target.getAttribute('data-id');
+                e.target.closest('tr').querySelector('td:nth-child(5)').innerHTML = '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Pending</span>';
+                e.target.closest('td').innerHTML = '<button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-2 rounded mr-1 confirm-booking" data-id="' + bookingId + '">Confirm</button><button class="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-2 rounded reject-booking" data-id="' + bookingId + '">Reject</button>';
+            }
+            
+            if (e.target.classList.contains('approve-review')) {
+                const reviewId = e.target.getAttribute('data-id');
+                alert('Review approved successfully');
+                e.target.closest('.border-b').remove();
+            }
+            
+            if (e.target.classList.contains('reject-review')) {
+                const reviewId = e.target.getAttribute('data-id');
+                alert('Review rejected successfully');
+                e.target.closest('.border-b').remove();
+            }
+            
+            if (e.target.classList.contains('edit-review')) {
+                const reviewId = e.target.getAttribute('data-id');
+                alert('Edit review with ID: ' + reviewId);
+            }
+        });
+
+        // Show gallery upload form
+        function showUploadForm(type) {
+            if (type === 'photo') {
+                document.getElementById('photoUploadForm').classList.remove('hidden');
+            } else {
+                document.getElementById('videoUploadForm').classList.remove('hidden');
+            }
+        }
+
+        // Hide gallery upload form
+        function hideUploadForm(type) {
+            if (type === 'photo') {
+                document.getElementById('photoUploadForm').classList.add('hidden');
+                document.getElementById('photoUpload').value = '';
+                document.getElementById('photoTitle').value = '';
+                document.getElementById('photoDescription').value = '';
+            } else {
+                document.getElementById('videoUploadForm').classList.add('hidden');
+                document.getElementById('videoUpload').value = '';
+                document.getElementById('videoTitle').value = '';
+                document.getElementById('videoDescription').value = '';
+            }
+        }
+
+        // Upload photo (simulated)
+        function uploadPhoto() {
+            const title = document.getElementById('photoTitle').value;
+            const description = document.getElementById('photoDescription').value;
+            
+            if (!title || !description) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            document.getElementById('photoUploadSpinner').classList.remove('hidden');
+            
+            setTimeout(function() {
+                document.getElementById('photoUploadSpinner').classList.add('hidden');
+                document.getElementById('photoUploadSuccess').classList.remove('hidden');
+                document.getElementById('photoUploadSuccess').textContent = 'Photo uploaded successfully!';
+                
+                hideUploadForm('photo');
+                
+                // In a real app, you would add the new photo to the gallery
+                setTimeout(function() {
+                    document.getElementById('photoUploadSuccess').classList.add('hidden');
+                }, 3000);
+            }, 2000);
+        }
+
+        // Upload video (simulated)
+        function uploadVideo() {
+            const title = document.getElementById('videoTitle').value;
+            const description = document.getElementById('videoDescription').value;
+            
+            if (!title || !description) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            document.getElementById('videoUploadSpinner').classList.remove('hidden');
+            
+            setTimeout(function() {
+                document.getElementById('videoUploadSpinner').classList.add('hidden');
+                document.getElementById('videoUploadSuccess').classList.remove('hidden');
+                document.getElementById('videoUploadSuccess').textContent = 'Video uploaded successfully!';
+                
+                hideUploadForm('video');
+                
+                // In a real app, you would add the new video to the gallery
+                setTimeout(function() {
+                    document.getElementById('videoUploadSuccess').classList.add('hidden');
+                }, 3000);
+            }, 2000);
+        }
+
+        // Image modal functions
+        function openModal(src) {
+            document.getElementById('imageModal').style.display = 'block';
+            document.getElementById('modalImage').src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('imageModal')) {
+                closeModal();
+            }
+        }
+
+        // Admin edit functions
+        function toggleEditButtons() {
+            document.querySelectorAll('.admin-edit-btn').forEach(btn => {
+                btn.classList.toggle('hidden');
+            });
+        }
+
+        function editService(id) {
+            alert(`Editing service with ID: ${id}`);
+            // Here you would show a modal/form to edit service details
+        }
+
+        function editBookingForm() {
+            alert('Editing booking form fields');
+            // Here you would show a modal/form to edit booking form fields
+        }
+
+        function editGalleryItem(id) {
+            alert(`Editing gallery item with ID: ${id}`);
+            // Here you would show a modal/form to edit gallery item details
+        }
+
+        function editHeroContent() {
+            showEditModal('Edit Hero Section', {
+                title: 'Surekha Mind Healing Experience',
+                subtitle: 'Transform your mental well-being with our unique cinematic therapy approach.',
+                description: 'Experience deep relaxation and healing through guided visualization techniques.',
+                buttonText: 'Book Your Session'
+            }, function(data) {
+                // Update hero section content
+                document.querySelector('#home h1').innerHTML = '<span class="text-blue-400">' + data.title.split(' ')[0] + '</span> ' + data.title.substring(data.title.indexOf(' ') + 1);
+                document.querySelector('#home p').textContent = data.subtitle + ' ' + data.description;
+                document.querySelector('#home a').textContent = data.buttonText;
+            });
+        }
+
+        function editAllServices() {
+            showServicesEditModal();
+        }
+
+        function editContactDetails() {
+            showEditModal('Edit Contact Information', {
+                address: '123 Healing Lane, Serenity City',
+                phone: '(555) 123-4567',
+                email: 'info@surekhamindheal.com'
+            }, function(data) {
+                document.getElementById('contactAddress').innerHTML = '<i class="fas fa-map-marker-alt mr-2"></i> ' + data.address;
+                document.getElementById('contactPhone').innerHTML = '<i class="fas fa-phone-alt mr-2"></i> ' + data.phone;
+                document.getElementById('contactEmail').innerHTML = '<i class="fas fa-envelope mr-2"></i> ' + data.email;
+            });
+        }
+
+        function editContactInfo() {
+            editContactDetails();
+        }
+
+        function editWebsiteSettings() {
+            showEditModal('Website Settings', {
+                siteName: 'Surekha Mind Healing',
+                tagline: 'Cinematic Healing Experience',
+                theme: 'blue'
+            }, function(data) {
+                document.title = data.siteName + ' - ' + data.tagline;
+                document.querySelectorAll('.text-blue-400').forEach(el => {
+                    el.textContent = data.siteName.split(' ')[0];
+                });
+            });
+        }
+
+        function editHeroSection() {
+            editHeroContent();
+        }
+
+        function showEditModal(title, currentData, onSave) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center';
+            modal.innerHTML = `
+                <div class="bg-white p-8 rounded-xl shadow-xl max-w-md w-full mx-4">
+                    <h3 class="text-xl font-bold mb-4">${title}</h3>
+                    <div id="editForm"></div>
+                    <div class="flex justify-end space-x-2 mt-6">
+                        <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded">Cancel</button>
+                        <button onclick="saveEditChanges()" class="px-4 py-2 bg-blue-500 text-white rounded">Save</button>
+                    </div>
+                </div>
+            `;
+            
+            const form = modal.querySelector('#editForm');
+            for (const [key, value] of Object.entries(currentData)) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.id = 'edit_' + key;
+                input.value = value;
+                input.className = 'w-full p-2 border rounded mb-2';
+                input.placeholder = key.charAt(0).toUpperCase() + key.slice(1);
+                
+                const label = document.createElement('label');
+                label.textContent = key.charAt(0).toUpperCase() + key.slice(1) + ':';
+                label.className = 'block text-sm font-medium mb-1';
+                
+                form.appendChild(label);
+                form.appendChild(input);
+            }
+            
+            modal.querySelector('button[onclick="saveEditChanges()"]').onclick = function() {
+                const updatedData = {};
+                for (const key of Object.keys(currentData)) {
+                    updatedData[key] = document.getElementById('edit_' + key).value;
+                }
+                onSave(updatedData);
+                modal.remove();
+            };
+            
+            document.body.appendChild(modal);
+        }
+
+        function showServicesEditModal() {
+            const services = [
+                {title: 'Cinematic Meditation', description: 'Immersive guided visualization sessions using cinematic techniques to transport you to peaceful environments.', icon: 'fas fa-video'},
+                {title: 'Mindfulness Therapy', description: 'Structured mindfulness sessions combining traditional techniques with multimedia elements for enhanced focus.', icon: 'fas fa-brain'},
+                {title: 'Sound Healing', description: 'Therapeutic soundscapes designed by audiologists to promote deep relaxation and stress reduction.', icon: 'fas fa-music'}
+            ];
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center';
+            modal.innerHTML = `
+                <div class="bg-white p-8 rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+                    <h3 class="text-xl font-bold mb-4">Edit All Services</h3>
+                    <div id="servicesForm"></div>
+                    <div class="flex justify-end space-x-2 mt-6">
+                        <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded">Cancel</button>
+                        <button onclick="saveServicesChanges()" class="px-4 py-2 bg-blue-500 text-white rounded">Save All</button>
+                    </div>
+                </div>
+            `;
+            
+            const form = modal.querySelector('#servicesForm');
+            services.forEach((service, index) => {
+                const serviceDiv = document.createElement('div');
+                serviceDiv.className = 'border p-4 rounded mb-4';
+                serviceDiv.innerHTML = `
+                    <h4 class="font-bold mb-2">Service ${index + 1}</h4>
+                    <label class="block text-sm font-medium mb-1">Title:</label>
+                    <input type="text" id="service_${index}_title" value="${service.title}" class="w-full p-2 border rounded mb-2">
+                    <label class="block text-sm font-medium mb-1">Description:</label>
+                    <textarea id="service_${index}_description" class="w-full p-2 border rounded mb-2" rows="3">${service.description}</textarea>
+                    <label class="block text-sm font-medium mb-1">Icon Class:</label>
+                    <input type="text" id="service_${index}_icon" value="${service.icon}" class="w-full p-2 border rounded">
+                `;
+                form.appendChild(serviceDiv);
+            });
+            
+            modal.querySelector('button[onclick="saveServicesChanges()"]').onclick = function() {
+                const serviceElements = document.querySelectorAll('#services .grid > div');
+                services.forEach((service, index) => {
+                    const title = document.getElementById(`service_${index}_title`).value;
+                    const description = document.getElementById(`service_${index}_description`).value;
+                    const icon = document.getElementById(`service_${index}_icon`).value;
+                    
+                    if (serviceElements[index]) {
+                        serviceElements[index].querySelector('h3').textContent = title;
+                        serviceElements[index].querySelector('p').textContent = description;
+                        serviceElements[index].querySelector('i').className = icon;
+                    }
+                });
+                modal.remove();
+            };
+            
+            document.body.appendChild(modal);
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial active nav link
+            updateActiveNavLink();
+        });
+    </script>
+</body>
+</html>
+
